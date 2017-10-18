@@ -1,4 +1,7 @@
-﻿namespace AspNetCoreTemplate.Web
+﻿using System.IO;
+using Microsoft.Extensions.FileProviders;
+
+namespace AspNetCoreTemplate.Web
 {
     using System.Reflection;
 
@@ -101,9 +104,21 @@
 
             app.UseAuthentication();
 
+            app.UseFileServer();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            // npm
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, "node_modules")
+                ),
+                RequestPath = "/node_modules",
+                EnableDirectoryBrowsing = false
             });
         }
     }
