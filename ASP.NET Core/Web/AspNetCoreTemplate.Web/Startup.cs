@@ -1,8 +1,7 @@
-﻿using System.IO;
-using Microsoft.Extensions.FileProviders;
-
-namespace AspNetCoreTemplate.Web
+﻿namespace AspNetCoreTemplate.Web
 {
+    using System;
+    using System.IO;
     using System.Reflection;
 
     using AspNetCoreTemplate.Data;
@@ -13,14 +12,18 @@ namespace AspNetCoreTemplate.Web
     using AspNetCoreTemplate.Services.Messaging;
     using AspNetCoreTemplate.Web.Infrastructure.Mapping;
     using AspNetCoreTemplate.Web.ViewModels.Account;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
+    using React.AspNet;
 
     public class Startup
     {
@@ -32,7 +35,7 @@ namespace AspNetCoreTemplate.Web
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Framework services
             services.AddDbContextPool<ApplicationDbContext>(
@@ -52,6 +55,9 @@ namespace AspNetCoreTemplate.Web
                 .AddRoleStore<ApplicationRoleStore>()
                 .AddDefaultTokenProviders();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+
             services.AddMvc();
 
             services.AddSingleton(this.configuration);
@@ -67,6 +73,8 @@ namespace AspNetCoreTemplate.Web
             // Identity stores
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
             services.AddTransient<IRoleStore<ApplicationRole>, ApplicationRoleStore>();
+
+            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +107,29 @@ namespace AspNetCoreTemplate.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Initialise ReactJS.NET. Must be before static files.
+            app.UseReact(config =>
+            {
+                // If you want to use server-side rendering of React components,
+                // add all the necessary JavaScript files here. This includes
+                // your components as well as all of their dependencies.
+                // See http://reactjs.net/ for more information. Example:
+                config
+                    .SetJsonSerializerSettings(new JsonSerializerSettings
+                    {
+                        StringEscapeHandling = StringEscapeHandling.EscapeHtml,
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
+
+                // If you use an external build too (for example, Babel, Webpack,
+                // Browserify or Gulp), you can improve performance by disabling
+                // ReactJS.NET's version of Babel and loading the pre-transpiled
+                // scripts. Example:
+                //config
+                //    .SetLoadBabel(false)
+                //    .AddScriptWithoutTransform("~/Scripts/bundle.server.js");
+            });
 
             app.UseStaticFiles();
 
