@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='Run - Development' />
+/// <binding BeforeBuild='Run - Development' AfterBuild='Run - Development' />
 var webpack = require('webpack');
 var path = require('path');
 
@@ -8,7 +8,7 @@ var scriptsDir = path.resolve(__dirname, './wwwroot/libs/tsxbuild');
 
 var config = {
     entry: {
-        home: scriptsDir + '/home' + '/home',
+        home: scriptsDir + '/folder' + '/home',
         vendor: ['react', 'react-dom']
     },
     output: {

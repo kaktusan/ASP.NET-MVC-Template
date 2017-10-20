@@ -1,4 +1,4 @@
-/// <binding AfterBuild='default' />
+/// <binding BeforeBuild='default' AfterBuild='default' />
 var gulp = require('gulp');
 
 var destPath = './wwwroot/plugins/';
