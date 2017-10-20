@@ -1,0 +1,32 @@
+{
+  "name": "aspnetcoretemplate",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "gulp": "latest",
+    "ts-loader": "latest",
+    "tsd": "latest",
+    "typescript": "latest",
+    "mobx-react-devtools": "^4.2.0"
+  },
+  "dependencies": {
+    "jquery": "3.2.1",
+    "jquery-validation": "1.17.0",
+    "jquery-validation-unobtrusive": "3.2.6",
+    "axios": "latest",
+    "bootstrap": "latest",
+    "mobx": "latest",
+    "mobx-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "d3": "latest",
+    "react-router": "latest",
+    "ag-grid": "latest",
+    "ag-grid-react": "latest",
+    "knockout": "latest",
+    "knockout-mapping": "latest",
+    "accounting": "^0.4.1",
+    "jspdf": "latest",
+    "html2canvas": "0.5.0-beta4"
+  }
+}
