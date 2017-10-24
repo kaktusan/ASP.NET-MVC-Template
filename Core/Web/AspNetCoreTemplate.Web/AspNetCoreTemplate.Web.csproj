@@ -38,6 +38,13 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\adminLTE\js\app.js" />
+    <None Include="wwwroot\adminLTE\js\app.min.js" />
+    <None Include="wwwroot\adminLTE\js\demo.js" />
+    <None Include="wwwroot\adminLTE\js\pages\dashboard.js" />
+    <None Include="wwwroot\adminLTE\js\pages\dashboard2.js" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\AspNetCoreTemplate.Data.Models\AspNetCoreTemplate.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\AspNetCoreTemplate.Data\AspNetCoreTemplate.Data.csproj" />
     <ProjectReference Include="..\..\Services\AspNetCoreTemplate.Services.Messaging\AspNetCoreTemplate.Services.Messaging.csproj" />
