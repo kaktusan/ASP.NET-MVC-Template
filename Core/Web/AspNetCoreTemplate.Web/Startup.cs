@@ -55,6 +55,10 @@
                 .AddRoleStore<ApplicationRoleStore>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IISOptions>(options =>
+            {
+            });
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddReact();
 
@@ -97,6 +101,8 @@
 
             loggerFactory.AddConsole(this.configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseDeveloperExceptionPage();
 
             if (env.IsDevelopment())
             {
