@@ -1,4 +1,6 @@
-﻿namespace AspNetCoreTemplate.Data.Common.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AspNetCoreTemplate.Data.Common.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;

@@ -1,4 +1,10 @@
-﻿namespace AspNetCoreTemplate.Web.Controllers
+﻿using System;
+using AspNetCoreTemplate.Data;
+using AspNetCoreTemplate.Data.Common.Repositories;
+using AspNetCoreTemplate.Data.Repositories;
+using Krista.FM.Domain;
+
+namespace AspNetCoreTemplate.Web.Controllers
 {
     using System.Linq;
     using System.Security.Claims;
@@ -22,6 +28,7 @@
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
         private readonly ISmsSender smsSender;
+        private readonly IRepository<AppliedAlters> repository;
         private readonly ILogger logger;
 
         public AccountController(
@@ -29,12 +36,14 @@
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            IRepository<AppliedAlters> repository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
             this.smsSender = smsSender;
+            this.repository = repository;
             this.logger = loggerFactory.CreateLogger<AccountController>();
         }
 

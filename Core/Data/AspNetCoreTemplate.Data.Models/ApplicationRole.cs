@@ -1,4 +1,8 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
+using System;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace AspNetCoreTemplate.Data.Models
 {
     using System;
@@ -27,5 +31,7 @@ namespace AspNetCoreTemplate.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public String Description { get; set; }
     }
 }

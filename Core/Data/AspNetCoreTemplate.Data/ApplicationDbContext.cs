@@ -1,4 +1,6 @@
-﻿namespace AspNetCoreTemplate.Data
+﻿using Krista.FM.Domain;
+
+namespace AspNetCoreTemplate.Data
 {
     using System;
     using System.Linq;
@@ -25,6 +27,10 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<AppliedAlters> AppliedAlters { get; set; }
+
+        public DbSet<ApppliedPatches> ApppliedPatches { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
