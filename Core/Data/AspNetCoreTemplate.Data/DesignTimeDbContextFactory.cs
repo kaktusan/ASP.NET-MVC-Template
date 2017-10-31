@@ -20,7 +20,7 @@
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            builder.UseSqlServer(connectionString);
+            builder.UseNpgsql(connectionString);
 
             // Stop client query evaluation
             builder.ConfigureWarnings(w => w.Throw(RelationalEventId.QueryClientEvaluationWarning));

@@ -25,6 +25,8 @@
     using Newtonsoft.Json.Serialization;
     using React.AspNet;
 
+    using Npgsql;
+
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -38,8 +40,8 @@
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Framework services
-            services.AddDbContextPool<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+            services.AddEntityFrameworkNpgsql().AddDbContextPool<ApplicationDbContext>(
+                options => options.UseNpgsql(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(
                 options =>
